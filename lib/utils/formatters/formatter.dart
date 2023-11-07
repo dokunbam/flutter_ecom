@@ -24,28 +24,41 @@ class TFormatter {
     // remove any non-digit character from the phone number
     var digitsOnly = phoneNumber.replaceAll(RegExp(r'\D'), '');
 
-    //Extract the country code from the digitsOnly
-
+    // Assuming the first two digits are the country code.
+    // For a real-world application, you would need a more robust way to determine the country code.
     String countryCode = '+${digitsOnly.substring(0, 2)}';
     digitsOnly = digitsOnly.substring(2);
 
-    //Add the remaining digits with proper formatting
+    // Add the remaining digits with proper formatting
     final formattedNumber = StringBuffer();
     formattedNumber.write('($countryCode) ');
 
     int i = 0;
     while (i < digitsOnly.length) {
-      int groupLength = 2;
+      // Define the group length
+      int groupLength;
+      // Check if the country code is +1 for North American Numbering Plan
+      // and adjust the first group length accordingly
       if (i == 0 && countryCode == '+1') {
-        groupLength = 3;
+        groupLength = 3; // area code
+      } else {
+        groupLength = i == 0 ? 3 : 2; // subsequent groups after area code
       }
 
-      int end = i + groupLength;
+      // Get the end position for the substring
+      int end = i + groupLength > digitsOnly.length
+          ? digitsOnly.length
+          : i + groupLength;
       formattedNumber.write(digitsOnly.substring(i, end));
 
+      // Add space after each group except the last one
       if (end < digitsOnly.length) {
         formattedNumber.write(' ');
       }
+      i = end; // Move the index to the end of the last group
     }
+
+    // Return the formatted number as a string
+    return formattedNumber.toString();
   }
 }
