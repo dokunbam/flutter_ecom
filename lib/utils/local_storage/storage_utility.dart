@@ -7,14 +7,22 @@ class TLocalStorage {
     return _instance;
   }
 
-  TLocalStorage._internal() {
-    final storage = GetStorage();
-  }
+  TLocalStorage._internal();
+
+  final _storage = GetStorage();
 
 //   //Generic method to save data
-//   Futur<void> saveData<T>(String key, T Value) async{
-//     \
-//     /56'5+AWA
-  
-// return null;}
+  Future<void> saveData<T>(String key, T value) async {
+    await _storage.write(key, value);
+  }
+
+//Generic method to read data
+  T? readData<T>(String key) {
+    return _storage.read<T>(key);
+  }
+
+  //Clear all data in storage
+  Future<void> clearAll() async {
+    await _storage.erase();
+  }
 }
