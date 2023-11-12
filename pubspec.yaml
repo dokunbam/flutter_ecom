@@ -40,6 +40,7 @@ dependencies:
   intl: ^0.18.1
   http: ^1.1.0
   flutter_native_splash: ^2.3.5
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -81,7 +82,7 @@ flutter:
   assets:
     - assets/logos/
     - assets/fonts/
-    - assets/images/
+    - assets/images/on_boarding_images/
     - assets/icons/
 
 #------------------------ LOCAL FONTS ------------------------

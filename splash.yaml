@@ -11,4 +11,3 @@ android:
   image_dark: assets/logos/whiteBg.jpg
 
 web: false
-android: true
